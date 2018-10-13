@@ -11,23 +11,30 @@ get_pwned_password_list() {
 }
 
 get_sha1() {
-	echo "$1"
-	shash="$(echo -n $1 | openssl sha1 | awk '{ print tolower($2) }')"
-	echo "$(get_pwned_password_list ${shash:0:5})" > passlist
-	readarray phasharr < passlist
-	for phash in "${phasharr[@]}"; do
-		if [ "${phash:0:5}" == "${shash:5:5}" ]; then
-			echo "Found in Pwned Passwords API"
-		fi
-	done
+	echo -n $1 | openssl sha1 | awk '{ print tolower($2) }'
 }
 
 cmp_hashes() {
 	echo "hi"
 }
 
+cmd_check_pwnage() {
+	local_hash="$( get_sha1 $1 )"
+	
+
+	echo "$(get_pwned_password_list ${local_hash:0:5})" > remote_hashes_list
+
+	readarray remote_hashes < remote_hashes_list
+
+	for remote_hash in "${remote_hashes[@]}"; do
+		if [ "${remote_hash:0:5}" == "${local_hash:5:5}" ]; then
+			echo "Found in Pwned Passwords API"
+		fi
+	done
+}
+
 case "$1" in
-	*) get_sha1 "$(get_password $@)";;
+	*) cmd_check_pwnage "$(get_password $@)";;
 esac
 
 exit 0

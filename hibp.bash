@@ -1,9 +1,9 @@
 #!/bin/bash
 
-VERSION="0.0.1"
+VERSION="0.1.0"
 
 get_password() {
-	$GPG -d "${GPG_OPTS[@]}" "$1.gpg" | head -n 1
+	$GPG -d "${GPG_OPTS[@]}" "$PREFIX/$1.gpg" | head -n 1
 }
 
 get_pwned_password_list() {

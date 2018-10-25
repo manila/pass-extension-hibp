@@ -24,7 +24,7 @@ cmd_check_pwnage() {
 		readarray remote_hashes < remote_hashes_list
 	
 		for remote_hash in "${remote_hashes[@]}"; do
-			if [ "${remote_hash:0:5}" == "${local_hash:5:5}" ]; then
+			if [ "${remote_hash:0:5}" == "${pass_hash:5:5}" ]; then
 				msg="Found in Pwned Passwords Database"
 			fi
 		done

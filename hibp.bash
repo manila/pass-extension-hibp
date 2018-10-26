@@ -4,7 +4,7 @@ VERSION="0.1.1"
 AWK=awk
 
 get_pwned_password_list() {
-	curl -s https://api.pwnedpasswords.com/range/$1 | $AWK -F ':' '{ print tolower($1) }'	
+	echo "$(curl -s https://api.pwnedpasswords.com/range/$1 | $AWK -F ':' '{ print tolower($1) }')"
 }
 
 get_sha1() {

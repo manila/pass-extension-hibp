@@ -29,12 +29,12 @@ cmd_check_pwnage() {
 	
 		for remote_hash in "${remote_hashes[@]}"; do
 			if [ "${remote_hash:0:5}" == "${pass_hash:5:5}" ]; then
-				msg="Found in Pwned Passwords Database"
+				msg="Oh no — pwned!\nThis password has been seen before\nThis password has previously appeared in a data breach and should never be used. If you've ever used it anywhere before, change it!"
 			fi
 		done
 	
 		rm -f remote_hashes_list
-		echo $msg
+		echo -e $msg
 	fi
 }
 

@@ -4,7 +4,7 @@ VERSION="0.1.1"
 AWK=awk
 
 get_pwned_password_list() {
-	echo "$(curl -s https://api.pwnedpasswords.com/range/$1 | $AWK -F ':' '{ print tolower($1) }')"
+	echo "$(curl -s https://api.pwnedpasswords.com/range/$1 | $AWK '{ print tolower($1) }')"
 }
 
 get_sha1() {
@@ -18,6 +18,7 @@ cmd_check_pwnage() {
 	elif [[ "$(cmd_show $1)" ]]; then
 		pass="$(cmd_show $1)"
 		local pass_hash="$( get_sha1 $pass )"
+		pass_count=0
 		local msg="Not found in Pwned Passwords Database"
 
 		tmpdir 
@@ -29,12 +30,17 @@ cmd_check_pwnage() {
 	
 		for remote_hash in "${remote_hashes[@]}"; do
 			if [ "${remote_hash:0:5}" == "${pass_hash:5:5}" ]; then
-				msg="Oh no — pwned!\nThis password has been seen before\nThis password has previously appeared in a data breach and should never be used. If you've ever used it anywhere before, change it!"
+				pass_count="$( echo ${remote_hash:36} | tr -d '\r\n')"
+				msg="Oh no — pwned! \r
+This password has been $pass_count time(s) before. \r
+This password has previously appeared in a data breach and should never be used. \r
+If you've ever used it anywhere before, change it!"
+				break
 			fi
 		done
 	
 		rm -f remote_hashes_list
-		echo -e $msg
+		echo -e "$msg"
 	fi
 }
 

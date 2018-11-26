@@ -32,7 +32,7 @@ cmd_check_pwnage() {
 			if [ "${remote_hash:0:5}" == "${pass_hash:5:5}" ]; then
 				pass_count="$( echo ${remote_hash:36} | tr -d '\r\n')"
 				msg="Oh no — pwned! \r
-This password has been $pass_count time(s) before. \r
+This password has been seen ${pass_count} time(s) before. \r
 This password has previously appeared in a data breach and should never be used. \r
 If you've ever used it anywhere before, change it!"
 				break

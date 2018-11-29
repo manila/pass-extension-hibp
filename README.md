@@ -8,7 +8,7 @@ This an extension for password store that will check your password against the H
 git clone https://github.com/manila/pass-extension-hibp && cd pass-extension && sudo make install
 ```
 
-# furtherreading
+# Further reading
 
 https://blog.manila.me/hibp-pass
 

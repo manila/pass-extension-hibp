@@ -4,11 +4,20 @@ This an extension for password store that will check your password against the H
 
 # Installation
 
+### Depends
+- [password store](https://www.passwordstore.org/)
+- AWK
+- curl
+
 ``` 
 git clone https://github.com/manila/pass-extension-hibp && cd pass-extension-hibp && sudo make install
 ```
+# Usage
+
+
 
 # Further reading
 
 https://blog.manila.me/hibp-pass
+
 

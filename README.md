@@ -8,6 +8,7 @@ This an extension for password store that will check your password against the H
 - [password store](https://www.passwordstore.org/)
 - awk
 - curl
+- openssl
 
 ``` 
 git clone https://github.com/manila/pass-extension-hibp && cd pass-extension-hibp && sudo make install

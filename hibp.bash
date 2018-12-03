@@ -12,8 +12,8 @@ get_sha1() {
 }
 
 cmd_check_pwnage() {
-	if [[ -z "$1" ]]; then
-		msg="Error: No passfile specified."
+	if [[ -z $1 ]]; then
+		msg="Usage: pass hibp [-a,--all] [pass-name]"
 		die "$msg"
 	elif [[ "$(cmd_show $1)" ]]; then
 		pass="$(cmd_show $1)"

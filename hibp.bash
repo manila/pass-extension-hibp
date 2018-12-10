@@ -8,7 +8,7 @@ get_pwned_password_list() {
 }
 
 get_sha1() {
-	echo -n $1 | openssl sha1 | awk '{ print tolower($2) }'
+	echo -n $1 | openssl sha1 | $AWK '{ print tolower($2) }'
 }
 
 cmd_check_pwnage() {
